@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../Hooks/useAuth.js";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function RegisterPage() {
-  const { register, isAuthenticated, errors: registerErrors } = useAuth();
+  const { register, isAuthenticated, errors: registerErrors = [] } = useAuth();
   const navigate = useNavigate();
   useEffect(() => {
     if (isAuthenticated) {
@@ -11,7 +11,7 @@ function RegisterPage() {
     }
   }, [isAuthenticated, navigate]);
 
-  const [formData, setFormdata] = useState({
+  const [formData, setFormData] = useState({
     username: "",
     email: "",
     password: "",
@@ -37,7 +37,7 @@ function RegisterPage() {
   };
 
   const handleChange = (e) => {
-    setFormdata({
+    setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
@@ -52,7 +52,7 @@ function RegisterPage() {
       setErrors({});
       try {
         const result = await register(formData);
-        console.log(result);
+        console.log(result.data);
       } catch (error) {
         console.error("Registration failed", error);
       }
@@ -117,6 +117,9 @@ function RegisterPage() {
             Register
           </button>
         </form>
+        <p className="flex gap-x-2 pt-2 justify-between text-gray-500">
+          Already have an account? <Link to="/login">Log in</Link>
+        </p>
       </div>
     </div>
   );
