@@ -20,10 +20,12 @@ function ProductsPage() {
   }
 
   return (
-    <div>
-      {products.data.map((product) => (
-        <ProductCard product={product} key={product._id} />
-      ))}
+    <div className="justify-center max-w-full p-[20px]">
+      <div className="flex flex-wrap max-w-[1604px] mx-auto justify-center">
+        {products.data.map((product) => (
+          <ProductCard product={product} key={product._id} />
+        ))}
+      </div>
     </div>
   );
 }

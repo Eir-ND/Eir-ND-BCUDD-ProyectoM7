@@ -5,8 +5,8 @@ function Footer() {
       <p>Fictitious e-shop with learning objectives.</p>
       <p>
         Developed by EIR_ND{" "}
-        <a className="underline" href="https://www.freepik.es/vectores/comida">
-          https://github.com/Eir-ND
+        <a className="underline" href="https://github.com/Eir-ND">
+          GitHub
         </a>
       </p>
     </footer>
