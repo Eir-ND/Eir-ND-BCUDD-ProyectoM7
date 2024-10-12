@@ -10,8 +10,8 @@ import {
 
 const router = Router();
 
-router.get("/products", authRequired, findAll);
-router.get("/products/:id", authRequired, findOne);
+router.get("/products", findAll);
+router.get("/products/:id", findOne);
 router.post("/products", authRequired, create);
 router.delete("/products/:id", authRequired, remove);
 router.put("/products/:id", authRequired, update);

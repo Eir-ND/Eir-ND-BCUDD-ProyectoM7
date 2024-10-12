@@ -7,24 +7,31 @@ import ProductFormPage from "./pages/ProductFormPage";
 import ProfilePage from "./pages/ProfilePage";
 import HomePage from "./pages/HomePage";
 import ProtectedRoute from "./ProtectedRoute";
+import { ProductProvider } from "./context/ProductContext";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/products" element={<ProductsPage />} />
+      <ProductProvider>
+        <BrowserRouter>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/products" element={<ProductsPage />} />
 
-          <Route element={<ProtectedRoute />}>
-            <Route path="/add-product" element={<ProductFormPage />} />
-            <Route path="/products/:id" element={<ProductFormPage />} />
-            <Route path="/profile" element={<ProfilePage />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+            <Route element={<ProtectedRoute />}>
+              <Route path="/add-product" element={<ProductFormPage />} />
+              <Route path="/products/:id" element={<ProductFormPage />} />
+              <Route path="/profile" element={<ProfilePage />} />
+            </Route>
+          </Routes>
+          <Footer />
+        </BrowserRouter>
+      </ProductProvider>
     </AuthProvider>
   );
 }
