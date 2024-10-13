@@ -66,14 +66,32 @@ export const logout = (req, res) => {
 };
 
 export const profile = async (req, res) => {
-  const userFound = await User.findById(req.user.id);
-  if (!userFound) return res.status(400).json({ message: "User not found" });
+  try {
+    const { username, email } = req.body;
+    const userFound = await User.findById(req.user.id); // Obtener ID desde el token JWT o sesión
 
-  return res.json({
-    id: userFound._id,
-    username: userFound.username,
-    email: userFound.email,
-  });
+    if (!userFound) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Actualizar los datos del usuario
+    userFound.username = username || userFound.username;
+    userFound.email = email || userFound.email;
+
+    await userFound.save();
+
+    return res.json({ message: "Profile updated successfully" });
+  } catch (error) {
+    return res.status(500).json({ message: "Server error" });
+
+    // const userFound = await User.findById(req.user.id);
+    // if (!userFound) return res.status(400).json({ message: "User not found" });
+
+    // return res.json({
+    //   id: userFound._id,
+    //   username: userFound.username,
+    //   email: userFound.email,
+  }
 };
 
 export const verifyToken = async (req, res) => {
@@ -93,4 +111,34 @@ export const verifyToken = async (req, res) => {
       email: userFound.email,
     });
   });
+};
+
+export const update = async (req, res) => {
+  let newDataForOurUser = req.body;
+
+  if (newDataForOurUser.password) {
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(newDataForOurUser.password, salt);
+
+    newDataForOurUser.password = hashedPassword;
+  }
+
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      req.user.id,
+      newDataForOurUser,
+      { new: true }
+    ).select("-password");
+
+    res.json({
+      msg: "User updated successfully",
+      data: updatedUser,
+    });
+  } catch (error) {
+    console.log(error);
+
+    res.status(500).json({
+      msg: "There was an error updating the user.",
+    });
+  }
 };

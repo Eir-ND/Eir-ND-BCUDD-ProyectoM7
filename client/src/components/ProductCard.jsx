@@ -1,8 +1,10 @@
 import { useProducts } from "../Hooks/useProducts";
 import { Link } from "react-router-dom";
+import { useAuth } from "../Hooks/useAuth";
 
 function ProductCard({ product }) {
   const { remove } = useProducts();
+  const { isAuthenticated } = useAuth();
 
   return (
     <div className="bg-white h-auto shadow-md hover:shadow-lg transition-shadow w-64 p-6 m-4 rounded-lg border border-gray-200 overflow-hidden">
@@ -33,17 +35,25 @@ function ProductCard({ product }) {
 
       {/* Botón de acción */}
       <div className="flex gap-x-2 items-center">
-        <button className="w-full bg-slate-300 text-white py-2 rounded-full hover:bg-blue-600 transition-colors">
-          Add to Cart
-        </button>
-        <button
-          onClick={() => {
-            remove(product._id);
-          }}
-        >
-          Del
-        </button>
-        <Link to={`/products/${product._id}`}>Edit</Link>
+        {isAuthenticated ? (
+          <>
+            <button className="w-full bg-slate-300 text-white py-2 rounded-full hover:bg-blue-600 transition-colors">
+              Add to Cart
+            </button>
+            <button
+              onClick={() => {
+                remove(product._id);
+              }}
+            >
+              Del
+            </button>
+            <Link to={`/products/${product._id}`}>Edit</Link>
+          </>
+        ) : (
+          <button className="w-full bg-slate-300 text-white py-2 rounded-full hover:bg-blue-600 transition-colors">
+            Add to Cart
+          </button>
+        )}
       </div>
     </div>
   );

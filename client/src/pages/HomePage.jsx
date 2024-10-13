@@ -10,16 +10,13 @@ function HomePage() {
           </p>
         </div>
         <div className="flex justify-center items-center">
-          <img src="../../public/luffy-zoro.png" className="h-full" />
+          <img src="/luffy-zoro.png" className="h-full" />
         </div>
       </div>
       <div className="flex h-[300px] pt-1">
-        <img
-          src="../../public/BANNER.jpg"
-          className="object-cover h-auto w-full"
-        />
+        <img src="/BANNER.jpg" className="object-cover h-auto w-full" />
 
-        <img src="../../public/BANNER-2.jpg" className="object-cover w-full" />
+        <img src="/BANNER-2.jpg" className="object-cover w-full" />
       </div>
     </div>
   );
