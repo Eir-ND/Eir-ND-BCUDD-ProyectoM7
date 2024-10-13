@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useCallback } from "react";
 import {
   createProductRequest,
   getProductRequest,
@@ -12,10 +12,10 @@ export const ProductContext = createContext();
 export function ProductProvider({ children }) {
   const [products, setProducts] = useState([]);
 
-  const findAll = async () => {
+  const findAll = useCallback(async () => {
     const result = await getProductsRequest();
     setProducts(result.data);
-  };
+  }, []);
 
   const findOne = async (id) => {
     try {
@@ -46,8 +46,15 @@ export function ProductProvider({ children }) {
   const remove = async (id) => {
     try {
       const result = await deleteProductRequest(id);
-      if (result.status === 204)
-        setProducts(products.filter((product) => product._id !== id));
+
+      if (result.status === 204) {
+        if (Array.isArray(products.data)) {
+          setProducts(products.data.filter((product) => product._id !== id));
+          findAll();
+        } else {
+          console.error("products is not an array");
+        }
+      }
     } catch (error) {
       console.log(error);
     }

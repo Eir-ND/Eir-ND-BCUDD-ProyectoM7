@@ -10,6 +10,7 @@ function ProductFormPage() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
+  const [image, setImage] = useState([]);
   const [errors, setErrors] = useState({});
 
   const onSubmit = async (e) => {
@@ -28,6 +29,7 @@ function ProductFormPage() {
     try {
       const productData = {
         title,
+        image,
         description,
         price,
       };
@@ -46,9 +48,10 @@ function ProductFormPage() {
     const loadProduct = async () => {
       if (params.id) {
         const product = await findOne(params.id);
-        setTitle(product.title);
-        setDescription(product.description);
-        setPrice(product.price);
+        setTitle(product.data.title);
+        setDescription(product.data.description);
+        setPrice(product.data.price);
+        setImage([product.data.image]);
       }
     };
     loadProduct();
@@ -67,6 +70,14 @@ function ProductFormPage() {
         {errors.title && (
           <p className="text-red-500 text-xs italic">{errors.title}</p>
         )}
+
+        <input
+          type="text"
+          placeholder="URL image"
+          value={image}
+          onChange={(e) => setImage(e.target.value)}
+          className="text-gray-700 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
 
         <textarea
           rows="3"

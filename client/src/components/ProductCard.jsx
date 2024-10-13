@@ -1,4 +1,9 @@
-const ProductCard = ({ product }) => {
+import { useProducts } from "../Hooks/useProducts";
+import { Link } from "react-router-dom";
+
+function ProductCard({ product }) {
+  const { remove } = useProducts();
+
   return (
     <div className="bg-white h-auto shadow-md hover:shadow-lg transition-shadow w-64 p-6 m-4 rounded-lg border border-gray-200 overflow-hidden">
       {/* Imagen del producto */}
@@ -31,10 +36,17 @@ const ProductCard = ({ product }) => {
         <button className="w-full bg-slate-300 text-white py-2 rounded-full hover:bg-blue-600 transition-colors">
           Add to Cart
         </button>
-        <button>Del</button>
+        <button
+          onClick={() => {
+            remove(product._id);
+          }}
+        >
+          Del
+        </button>
+        <Link to={`/products/${product._id}`}>Edit</Link>
       </div>
     </div>
   );
-};
+}
 
 export default ProductCard;

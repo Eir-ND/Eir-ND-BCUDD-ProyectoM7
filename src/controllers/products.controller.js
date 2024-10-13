@@ -28,11 +28,12 @@ export const findOne = async (req, res) => {
 
 export const create = async (req, res) => {
   try {
-    const { title, description, price } = req.body;
+    const { title, description, price, image } = req.body;
     const newProduct = new Product({
       title,
       description,
       price,
+      image,
     });
     const savedProduct = await newProduct.save();
     res.json({
@@ -51,22 +52,22 @@ export const remove = async (req, res) => {
     if (!product) {
       return res.status(404).json({ msg: "Product not found" });
     }
-    res.json({
-      message: "Product deleted",
-      data: product,
-    });
+    // res.json({
+    //   message: "Product deleted",
+    //   data: product,
+    // });
+    return res.sendStatus(204);
   } catch (error) {
-    console.error(error);
     res.status(500).json({ msg: "Error deleting a product", error });
   }
 };
 
 export const update = async (req, res) => {
   try {
-    const { title, description, price } = req.body;
+    const { title, description, price, image } = req.body;
     const product = await Product.findByIdAndUpdate(
       req.params.id,
-      { title, description, price },
+      { title, description, price, image },
       { new: true }
     );
     res.json({

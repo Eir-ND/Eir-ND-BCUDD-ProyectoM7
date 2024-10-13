@@ -14,12 +14,12 @@ function HomePage() {
         </div>
       </div>
       <div className="flex h-[300px] pt-1">
-        <div>
-          <img src="../../public/BANNER.jpg" className="w-full h-full" />
-        </div>
-        <div>
-          <img src="../../public/BANNER-2.jpg" className="w-full h-full" />
-        </div>
+        <img
+          src="../../public/BANNER.jpg"
+          className="object-cover h-auto w-full"
+        />
+
+        <img src="../../public/BANNER-2.jpg" className="object-cover w-full" />
       </div>
     </div>
   );
