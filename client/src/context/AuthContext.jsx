@@ -4,6 +4,9 @@ import {
   loginRequest,
   verifyTokenRequest,
   updateRequest,
+  editCartRequest,
+  getCartRequest,
+  getCheckoutSessionRequest,
   // getUserRequest,
 } from "../api/auth";
 import Cookies from "js-cookie";
@@ -70,6 +73,38 @@ export const AuthProvider = ({ children }) => {
   //   }
   // };
 
+  const editCart = async (data) => {
+    try {
+      const result = await editCartRequest(data);
+
+      await getCart();
+
+      return result.data.msg;
+    } catch (error) {
+      console.log(error);
+
+      return;
+    }
+  };
+
+  const getCart = async () => {
+    try {
+      const result = await getCartRequest();
+      console.log(result.data);
+    } catch (error) {
+      console.log(error);
+
+      return;
+    }
+  };
+
+  const getCheckoutSession = async () => {
+    const result = await getCheckoutSessionRequest();
+    console.log(result.data);
+
+    return;
+  };
+
   useEffect(() => {
     async function checkLogin() {
       const cookies = Cookies.get();
@@ -108,8 +143,11 @@ export const AuthProvider = ({ children }) => {
         loading,
         logout,
         update,
+        editCart,
+        getCart,
         // findOne,
         isAuthenticated,
+        getCheckoutSession,
         errors,
       }}
     >

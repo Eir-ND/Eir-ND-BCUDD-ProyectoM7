@@ -10,6 +10,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import { ProductProvider } from "./context/ProductContext";
 import Navbar from "./components/Layout/Navbar";
 import Footer from "./components/Layout/Footer";
+import Checkout from "./pages/CheckoutPage";
 // import  from "./components/Layout/Index";
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
               <Route path="/add-product" element={<ProductFormPage />} />
               <Route path="/products/:id" element={<ProductFormPage />} />
               <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/carrito" element={<Checkout />} />
             </Route>
           </Routes>
           <Footer />
