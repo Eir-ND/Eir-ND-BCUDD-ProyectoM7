@@ -42,12 +42,20 @@ $ npm install
 
 - Asegúrate de tener un archivo `.env` con las variables de entorno con la siguiente estructura:
 
+.env en Backend:
+
 ```
 TOKEN_SECRET=<YOUR_SECTRET>
 PORT=3000
 MONGODB_URI=<MongoDBConnectionString>
 STRIPE_SECRET_KEY=<STRIPE_PRIVATE_KET>
 STRIPE_WH_SIGNING_SECRET=<STRIPE_WEBHOOK_SECRET>
+```
+
+.env en Frontend:
+
+```
+VITE_BACKEND_URL=http://localhost:3000
 ```
 
 - Ejecutar el proyecto con el `script` de `dev`

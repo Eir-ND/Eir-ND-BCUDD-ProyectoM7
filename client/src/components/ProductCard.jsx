@@ -8,8 +8,8 @@ function ProductCard({ product }) {
   const { isAuthenticated } = useAuth();
 
   return (
-    <div className="bg-white h-[400px] shadow-md hover:shadow-lg hover:scale-105 transition-shadow w-64 p-6 m-4 rounded-lg border border-gray-200 overflow-hidden">
-      <div className="w-full bg-gray-100 flex items-center justify-center">
+    <div className="bg-white h-[400px] shadow-md hover:shadow-lg hover:scale-105 transition-shadow w-64 p-6 m-4 rounded-lg border border-gray-200 overflow-hidden flex flex-col justify-between">
+      <div className="w-full h-auto bg-gray-100 flex items-center justify-center">
         <img
           src={product.image || "https://via.placeholder.com/150"}
           alt={product.title}
