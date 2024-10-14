@@ -12,10 +12,6 @@ Esto comprende los siguientes puntos:
 - Autenticación de usuarios, incluido el registro de cuentas y el inicio de sesión, mediante JSON Web Tokens (JWT).
 - Autorización, mediante la creación de áreas privadas en las que los usuarios puedan acceder y gestionar su perfil e información personal.
 
-## Link en producción
-
-Puede ir a la app en producción mediante el siguiente [LINK]() o realizar la instalación mediante el siguiente item.
-
 ## Prototipado simple de frontend
 
 ![](img-readme/Prototipado.jpg)
