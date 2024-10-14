@@ -1,6 +1,7 @@
 import express from "express";
 import authRoutes from "./routes/auth.routes.js";
 import productRoutes from "./routes/products.routes.js";
+import paymentRoutes from "./routes/payment.routes.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
@@ -14,6 +15,7 @@ app.use(
 );
 app.use(express.json());
 app.use(cookieParser());
+app.use(paymentRoutes);
 app.use("/api", authRoutes);
 app.use("/api", productRoutes);
 
