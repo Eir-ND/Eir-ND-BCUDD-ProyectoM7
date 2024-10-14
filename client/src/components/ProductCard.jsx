@@ -51,7 +51,8 @@ function ProductCard({ product }) {
           </>
         ) : (
           <button className="w-full bg-slate-300 text-white py-2 rounded-full hover:bg-blue-600 transition-colors">
-            Add to Cart
+            {" "}
+            <Link to="/login">Add to Cart</Link>
           </button>
         )}
       </div>
