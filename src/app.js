@@ -15,7 +15,7 @@ app.use(
 );
 app.use(express.json());
 app.use(cookieParser());
-app.use(paymentRoutes);
+app.use("/api/checkout", paymentRoutes);
 app.use("/api", authRoutes);
 app.use("/api", productRoutes);
 

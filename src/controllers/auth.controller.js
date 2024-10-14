@@ -1,4 +1,5 @@
 import User from "../models/user.model.js";
+import Cart from "../models/cart.model.js";
 import bcrypt from "bcryptjs";
 import { createAccessToken } from "../libs/jwt.js";
 import jwt from "jsonwebtoken";
@@ -16,10 +17,12 @@ export const register = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    const newCart = await Cart.create({});
     const newUser = new User({
       username,
       email,
       password: hashedPassword,
+      cart: newCart,
     });
     const userSaved = await newUser.save();
     const token = await createAccessToken({ id: userSaved._id });

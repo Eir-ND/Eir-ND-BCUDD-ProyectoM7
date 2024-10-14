@@ -17,6 +17,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    receipts: {
+      type: Array,
+      default: [],
+    },
   },
   {
     timestamps: true,
